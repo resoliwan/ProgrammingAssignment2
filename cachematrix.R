@@ -1,15 +1,45 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
+#mack martix obj
 
 makeCacheMatrix <- function(x = matrix()) {
+        thisInverseMatrix <- NULL
+        thisMatrix <- NULL
+        set <- function(martix){
+                thisMatrix <<- martix;
+        }
 
+        get <- function(){
+                thisMatrix
+        }
+
+        setInverseMatrix <- function(inverseMatrix){
+                thisInverseMatrix <<- inverseMatrix
+        }
+
+        getInverseMatrix <- function(){
+                thisInverseMatrix
+        }
+
+        list(
+                set = set,
+                get = get,
+                setInverseMatrix = setInverseMatrix,
+                getInverseMatrix = getInverseMatrix
+        )
 }
 
 
-## Write a short comment describing this function
+## cache inverse matrix at matrix class
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(m, ...) {
+        inverseMatrix <- m$getInverseMatrix();
+         if(!is.null(inverseMatrix)){
+                message("getting cached data")
+                return(inverseMatrix)
+         }
+
+         matrix <- m$get();
+         inverseMatrix <- solve(matrix, ...)
+         m$setInverseMatrix(inverseMatrix)
+         inverseMatrix
+
 }
