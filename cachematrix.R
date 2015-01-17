@@ -1,13 +1,15 @@
 #mack martix obj
 
 makeCacheMatrix <- function(x = matrix()) {
+        #init thisMatrix
+        thisMatrix <- x
         thisInverseMatrix <- NULL
-        thisMatrix <- NULL
-        set <- function(martix){
+
+        setMartix <- function(martix){
                 thisMatrix <<- martix;
         }
 
-        get <- function(){
+        getMatrix <- function(){
                 thisMatrix
         }
 
@@ -20,8 +22,8 @@ makeCacheMatrix <- function(x = matrix()) {
         }
 
         list(
-                set = set,
-                get = get,
+                setMartix = setMartix,
+                getMatrix = getMatrix,
                 setInverseMatrix = setInverseMatrix,
                 getInverseMatrix = getInverseMatrix
         )
@@ -37,7 +39,7 @@ cacheSolve <- function(m, ...) {
                 return(inverseMatrix)
          }
 
-         matrix <- m$get();
+         matrix <- m$getMatrix();
          inverseMatrix <- solve(matrix, ...)
          m$setInverseMatrix(inverseMatrix)
          inverseMatrix
